@@ -19,7 +19,11 @@
       },
       methods: {
         login2resume() {
-            this.postRequest()
+            this.postRequest("/login",this.userInfo).then(res => {
+                if(res) {
+                    console.log(res)
+                }
+            })
         }
       }
              

@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import '../src/api/init.js'
+import { postRequest, getRequest, putRequest, deleteRequest } from '../src/api/init.js'
 
 router.beforeEach((to, from, next) => {
     const isAuthenticated = localStorage.getItem('isAuthenticated')
@@ -15,11 +16,11 @@ router.beforeEach((to, from, next) => {
 
 const app = createApp(App)
 
-import { postRequest, getRequest, putRequest, deleteRequest } from '../src/api/init.js'
+
 
 app.config.globalProperties.getRequest = getRequest
 app.config.globalProperties.postRequest = postRequest
 app.config.globalProperties.putRequest = putRequest
 app.config.globalProperties.deleteRequest = deleteRequest
 
-createApp(App).use(store).use(router).mount('#app')
+app.use(store).use(router).mount('#app')

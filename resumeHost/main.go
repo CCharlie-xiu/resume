@@ -16,13 +16,31 @@ func main() {
 	CONFIG := cors.DefaultConfig()
 	CONFIG.AllowOrigins = []string{"*"}
 	CONFIG.AllowMethods = []string{"GET", "POST", "OPTIONS"}
-	CONFIG.AllowHeaders = []string{"Content-Type"}
-	CONFIG.AllowHeaders = []string{"Authorization"}
+	CONFIG.AllowHeaders = []string{"Content-Type", "Authorization"}
 	r.Use(cors.New(CONFIG))
 	r.GET("/", func(ctx *gin.Context) {
 		ctx.JSON(200, gin.H{
 			"message": "Hello World",
 		})
+	})
+	r.POST("/login", func(ctx *gin.Context) {
+		ctx.Header("Access-Control-Allow-Headers", "Content-Type, Authorization")
+		var userInfo struct {
+			Username string `json:"username"`
+			Password string `json:"password"`
+		}
+		errBind := ctx.Bind(&userInfo)
+		if errBind != nil {
+			log.Fatal(errBind)
+		}
+		var user DB.User
+		result := DB.DB.Where("username=? AND password=?", userInfo.Username, userInfo.Password).First(&user)
+		if result.RowsAffected > 0 {
+			ctx.JSON(http.StatusOK, gin.H{
+				"message": "登录成功",
+				"data":    user.UUID,
+			})
+		}
 	})
 	r.POST("/insert", func(ctx *gin.Context) {
 		var newUser struct {
