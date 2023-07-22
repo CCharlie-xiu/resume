@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/resumeHost.iml" filepath="$PROJECT_DIR$/.idea/resumeHost.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/resumeNewHost.iml" filepath="$PROJECT_DIR$/.idea/resumeNewHost.iml" />
     </modules>
   </component>
 </project>

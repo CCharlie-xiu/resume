@@ -1,4 +1,4 @@
-module resumeHost
+module resumeNewHost
 
 go 1.20
 

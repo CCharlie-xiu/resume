@@ -6,7 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
-	"resumeHost/DB"
+	"resumeNewHost/DB"
 )
 
 func main() {
